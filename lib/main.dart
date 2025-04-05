@@ -1,13 +1,29 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_quiz/intro_page.dart';
+import 'package:flutter_quiz/questions_page.dart';
 
 void main() {
   runApp(const FlutterQuizApp());
 }
 
-class FlutterQuizApp extends StatelessWidget {
+class FlutterQuizApp extends StatefulWidget {
   const FlutterQuizApp({super.key});
+
+  @override
+  State<FlutterQuizApp> createState() {
+    return _FlutterQuizState();
+  }
+}
+
+class _FlutterQuizState extends State<FlutterQuizApp> {
+  bool _isQuizOn = false;
+
+  void nextPage() {
+    setState(() {
+      _isQuizOn = !_isQuizOn;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +40,7 @@ class FlutterQuizApp extends StatelessWidget {
               end: Alignment.bottomRight,
             ),
           ),
-          child: const IntroPage(),
+          child: _isQuizOn ? const QuestionsPage() : IntroPage(nextPage),
         ),
       ),
     );

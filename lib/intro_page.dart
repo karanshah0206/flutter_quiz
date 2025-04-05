@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class IntroPage extends StatelessWidget {
-  const IntroPage({super.key});
+  final void Function() nextPage;
+
+  const IntroPage(this.nextPage, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,13 +12,13 @@ class IntroPage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Image.asset(
-            "assets/images/quiz-logo.png",
+            'assets/images/quiz-logo.png',
             width: 300,
             color: Color.fromARGB(175, 255, 255, 255),
           ),
           const SizedBox(height: 25),
           const Text(
-            "Learn Flutter the fun way!",
+            'Learn Flutter the fun way!',
             style: TextStyle(
               color: Color.fromARGB(195, 255, 255, 255),
               fontSize: 22,
@@ -24,9 +26,9 @@ class IntroPage extends StatelessWidget {
           ),
           const SizedBox(height: 30),
           OutlinedButton.icon(
-            onPressed: () => {},
+            onPressed: nextPage,
             style: OutlinedButton.styleFrom(foregroundColor: Colors.white),
-            label: const Text("Start Quiz"),
+            label: const Text('Start Quiz'),
             icon: const Icon(Icons.arrow_forward),
           ),
         ],
