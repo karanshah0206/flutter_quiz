@@ -31,7 +31,7 @@ class _QuestionsState extends State<QuestionsPage> {
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 30),
-          ...questions[_questionIndex].shuffledOptions().map(
+          ...questions[_questionIndex].shuffledOptions.map(
             (answerOption) => ElevatedButton(
               onPressed: () {
                 widget.saveAnswer(_questionIndex, answerOption);

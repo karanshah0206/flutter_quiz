@@ -9,7 +9,7 @@ class Question {
     this.correctAnswerIndex,
   );
 
-  List<String> shuffledOptions() {
+  List<String> get shuffledOptions {
     List<String> result = List.of(answerOptions);
     result.shuffle();
     return result;

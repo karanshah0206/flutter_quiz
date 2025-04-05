@@ -7,7 +7,7 @@ class ResultsPage extends StatelessWidget {
 
   const ResultsPage(this.selectedAnswers, this.nextPage, {super.key});
 
-  List<Map<String, Object>> getResults() {
+  List<Map<String, Object>> get results {
     final List<Map<String, Object>> summary = [];
     for (int i = 0; i < selectedAnswers.length; i++) {
       summary.add({
@@ -23,10 +23,9 @@ class ResultsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, Object>> resultsData = getResults();
     final int questionsCount = questions.length;
     final int correctAnswersCount =
-        resultsData.where((result) {
+        results.where((result) {
           return result['selected_answer'] == result['correct_answer'];
         }).length;
 
@@ -48,7 +47,7 @@ class ResultsPage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  ...resultsData.map((summary) {
+                  ...results.map((summary) {
                     return Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
