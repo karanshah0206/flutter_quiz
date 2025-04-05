@@ -8,4 +8,10 @@ class Question {
     this.answerOptions,
     this.correctAnswerIndex,
   );
+
+  List<String> shuffledOptions() {
+    List<String> result = List.of(answerOptions);
+    result.shuffle();
+    return result;
+  }
 }
