@@ -3,6 +3,7 @@ import 'package:flutter_quiz/data/questions.dart';
 
 import 'package:flutter_quiz/intro_page.dart';
 import 'package:flutter_quiz/questions_page.dart';
+import 'package:flutter_quiz/results_page.dart';
 
 void main() {
   runApp(const FlutterQuizApp());
@@ -18,12 +19,18 @@ class FlutterQuizApp extends StatefulWidget {
 }
 
 class _FlutterQuizState extends State<FlutterQuizApp> {
-  bool _isQuizOn = false;
+  int _pageIndicator = 0; // 0 = home, 1 = quiz, 2 = results
   List<String> selectedAnswers = List<String>.filled(questions.length, '');
+
+  Widget _getPage() {
+    if (_pageIndicator == 0) return IntroPage(nextPage);
+    if (_pageIndicator == 1) return QuestionsPage(saveAnswer, nextPage);
+    return ResultsPage(selectedAnswers, nextPage);
+  }
 
   void nextPage() {
     setState(() {
-      _isQuizOn = !_isQuizOn;
+      _pageIndicator = (_pageIndicator + 1) % 3;
     });
   }
 
@@ -46,10 +53,7 @@ class _FlutterQuizState extends State<FlutterQuizApp> {
               end: Alignment.bottomRight,
             ),
           ),
-          child:
-              _isQuizOn
-                  ? QuestionsPage(saveAnswer, nextPage)
-                  : IntroPage(nextPage),
+          child: _getPage(),
         ),
       ),
     );
