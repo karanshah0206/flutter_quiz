@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quiz/data/questions.dart';
 
 import 'package:flutter_quiz/intro_page.dart';
 import 'package:flutter_quiz/questions_page.dart';
@@ -18,11 +19,16 @@ class FlutterQuizApp extends StatefulWidget {
 
 class _FlutterQuizState extends State<FlutterQuizApp> {
   bool _isQuizOn = false;
+  List<String> selectedAnswers = List<String>.filled(questions.length, '');
 
   void nextPage() {
     setState(() {
       _isQuizOn = !_isQuizOn;
     });
+  }
+
+  void saveAnswer(int questionIndex, String selectedAnswer) {
+    selectedAnswers[questionIndex] = selectedAnswer;
   }
 
   @override
@@ -40,7 +46,10 @@ class _FlutterQuizState extends State<FlutterQuizApp> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: _isQuizOn ? const QuestionsPage() : IntroPage(nextPage),
+          child:
+              _isQuizOn
+                  ? QuestionsPage(saveAnswer, nextPage)
+                  : IntroPage(nextPage),
         ),
       ),
     );

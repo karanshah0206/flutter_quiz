@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quiz/data/questions.dart';
 
 class QuestionsPage extends StatefulWidget {
-  const QuestionsPage({super.key});
+  final void Function(int, String) saveAnswer;
+  final void Function() nextPage;
+
+  const QuestionsPage(this.saveAnswer, this.nextPage, {super.key});
 
   @override
   State<QuestionsPage> createState() {
@@ -30,7 +33,16 @@ class _QuestionsState extends State<QuestionsPage> {
           SizedBox(height: 30),
           ...questions[_questionIndex].answerOptions.map(
             (answerOption) => ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                widget.saveAnswer(_questionIndex, answerOption);
+                if (_questionIndex != questions.length - 1) {
+                  setState(() {
+                    _questionIndex++;
+                  });
+                } else {
+                  widget.nextPage();
+                }
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 33, 1, 95),
                 foregroundColor: const Color.fromARGB(175, 255, 255, 255),
@@ -38,7 +50,7 @@ class _QuestionsState extends State<QuestionsPage> {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              child: Text(answerOption),
+              child: Text(answerOption, textAlign: TextAlign.center),
             ),
           ),
         ],
