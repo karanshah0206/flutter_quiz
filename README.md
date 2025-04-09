@@ -7,6 +7,8 @@ Flutter Quiz is a simple quiz app built with Flutter. It has the following featu
 
 I've created it on my journey to learning Flutter, but users looking for an MCQ-style quiz app that is easy to use, maintain, and update can clone this project and modify the questions to their own preference to get a useful product for themselves.
 
+![App Demo](demo.png)
+
 ## Setup
 
 First off, if you haven't already, get the [Flutter SDK](https://docs.flutter.dev/get-started/install).
