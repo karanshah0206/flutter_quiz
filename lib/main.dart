@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_quiz/data/questions.dart';
 
 import 'package:flutter_quiz/intro_page.dart';
@@ -6,7 +7,12 @@ import 'package:flutter_quiz/questions_page.dart';
 import 'package:flutter_quiz/results_page.dart';
 
 void main() {
-  runApp(const FlutterQuizApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((
+    _,
+  ) {
+    runApp(const FlutterQuizApp());
+  });
 }
 
 class FlutterQuizApp extends StatefulWidget {
